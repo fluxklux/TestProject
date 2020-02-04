@@ -23,7 +23,7 @@ public class MoveController : MonoBehaviour
         selectedPlayer = playerIndex;
 
         //event
-        uc.TriggerEvent("Move P" + (playerIndex + 1) + ": " + steps + " steps");
+        uc.TriggerEvent("MOVE P" + (playerIndex + 1) + ": " + steps + " STEPS");
 
         int calcIndex = players[selectedPlayer].GetComponent<PlayerController>().currentSlotPosition + steps;
         calcIndex = (int)Mathf.Repeat(calcIndex, gc.allSlots.Length);

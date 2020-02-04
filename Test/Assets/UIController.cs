@@ -8,21 +8,15 @@ public class UIController : MonoBehaviour
     [Header("Player Texts")]
 
     public Text playerOne;
-
     public Text playerTwo;
-
     public Text playerThree;
-
     public Text playerFour;
 
     [Header("Player Ints")]
 
     public int playerOneFruits;
-
     public int playerTwoFruits;
-
     public int playerThreeFruits;
-
     public int playerFourFruits;
 
     public Text timerText;
@@ -30,13 +24,11 @@ public class UIController : MonoBehaviour
 
     GameController gc;
 
-    // Start is called before the first frame update
     void Start()
     {
         gc = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         DisplayPlayerInts();
@@ -44,13 +36,10 @@ public class UIController : MonoBehaviour
 
     void DisplayPlayerInts()
     {
-        playerOne.text = "P1 Fruits: " + playerOneFruits;
-
-        playerTwo.text = "P2 Fruits: " + playerTwoFruits;
-
-        playerThree.text = "P3 Fruits: " + playerThreeFruits;
-
-        playerFour.text = "P4 Fruits: " + playerFourFruits;
+        playerOne.text = "P1: " + playerOneFruits;
+        playerTwo.text = "P2: " + playerTwoFruits;
+        playerThree.text = "P3: " + playerThreeFruits;
+        playerFour.text = "P4: " + playerFourFruits;
     }
 
     public void DisplayTimerFloat(float timer)

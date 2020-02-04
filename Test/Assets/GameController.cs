@@ -103,7 +103,7 @@ public class GameController : MonoBehaviour
     IEnumerator ResetQueue()
     {
         yield return new WaitForSeconds(0.5f);
-        uc.TriggerEvent("Reseting Queue");
+        uc.TriggerEvent("RESETING QUEUE...");
 
         yield return new WaitForSeconds(3);
         queueObjects.Clear();
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
         }
 
         queueFinished = true;
-        uc.TriggerEvent("Queue Reset!");
+        uc.TriggerEvent("QUEUE RESET!");
     }
 
     IEnumerator CycleQueue(float actionLength, int queueIndex)
@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            uc.TriggerEvent("Queue done!");
+            uc.TriggerEvent("QUEUE DONE!");
             TriggerTimer(true);
             StartCoroutine(ResetQueue());
             //reset queue and start again.
@@ -158,7 +158,7 @@ public class GameController : MonoBehaviour
         if (queueFinished)
         {
             TriggerTimer(false);
-            uc.TriggerEvent("Waiting for player inputs");
+            uc.TriggerEvent("WAITING FOR PLAYER INPUTS");
             dpad.Randomize();
             queueFinished = false;
         }
