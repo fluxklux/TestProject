@@ -6,10 +6,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class QueueObject
 {
-
     public int playerIndex; //player index, p1 = 0, p2 = 1 .....
     public int steps; //amount of steps forward
-
 }
 
 public class GameController : MonoBehaviour
@@ -22,6 +20,8 @@ public class GameController : MonoBehaviour
 
     public List<QueueObject> queueObjects = new List<QueueObject>();
     public bool queueFinished = true;
+
+    int[] playerFruits = { 0, 0, 0, 0 };
 
     float timer;
     float timerMax = 25;
@@ -38,6 +38,13 @@ public class GameController : MonoBehaviour
         uc = GetComponent<UIController>();
         ic = GetComponent<InputController>();
         dpad = GetComponent<DPad>();
+    }
+
+    public void ChangeFruitAmount (int playerIndex, int amount)
+    {
+        //+ fungerar för + (-10) blir minus.
+        playerFruits[playerIndex] += amount;
+        uc.UpdatePlayerFruits(playerFruits);
     }
 
     void Update()

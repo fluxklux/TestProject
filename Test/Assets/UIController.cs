@@ -12,13 +12,6 @@ public class UIController : MonoBehaviour
     public Text playerThree;
     public Text playerFour;
 
-    [Header("Player Ints")]
-
-    public int playerOneFruits;
-    public int playerTwoFruits;
-    public int playerThreeFruits;
-    public int playerFourFruits;
-
     public Text timerText;
     public Text eventText;
 
@@ -29,17 +22,13 @@ public class UIController : MonoBehaviour
         gc = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
-    void Update()
+    public void UpdatePlayerFruits(int[] playerFruits)
     {
-        DisplayPlayerInts();
-    }
-
-    void DisplayPlayerInts()
-    {
-        playerOne.text = "P1: " + playerOneFruits;
-        playerTwo.text = "P2: " + playerTwoFruits;
-        playerThree.text = "P3: " + playerThreeFruits;
-        playerFour.text = "P4: " + playerFourFruits;
+        //byt till for loop
+        playerOne.text = "P1: " + playerFruits[0];
+        playerTwo.text = "P2: " + playerFruits[1];
+        playerThree.text = "P3: " + playerFruits[2];
+        playerFour.text = "P4: " + playerFruits[3];
     }
 
     public void DisplayTimerFloat(float timer)
