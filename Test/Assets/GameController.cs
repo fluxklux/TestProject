@@ -44,6 +44,12 @@ public class GameController : MonoBehaviour
     {
         //+ fungerar för + (-10) blir minus.
         playerFruits[playerIndex] += amount;
+
+        if(playerFruits[playerIndex] < 0)
+        {
+            playerFruits[playerIndex] = 0;
+        }
+
         uc.UpdatePlayerFruits(playerFruits);
     }
 
