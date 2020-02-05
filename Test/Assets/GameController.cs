@@ -23,9 +23,11 @@ public class GameController : MonoBehaviour
 
     int[] playerFruits = { 0, 0, 0, 0 };
 
-    float timer;
+    [HideInInspector] public float timer;
     float timerMax = 25;
     bool countDown = false;
+
+    bool haveDone = false;
 
     InputController ic;
     UIController uc;
@@ -70,9 +72,27 @@ public class GameController : MonoBehaviour
             {
                 countDown = false;
                 queueFinished = true;
-                StartCoroutine(WaitForNextRound());
+                //StartCoroutine(WaitForNextRound());
 
             }
+
+            if (timer > 19 && timer < 22 && !haveDone)
+            {
+
+                if (queueObjects.Count == 4)
+                {
+                    StartCoroutine(CycleQueue(1, 0));
+                    //Get the action length in some way and input it to the queue ienumerator (first parameter)
+                    //queue should always start on index 0
+                }
+                else
+                {
+                    StartCoroutine(CycleQueue(1, 0));
+                }
+
+                haveDone = true;
+            }
+
         }
     }
 
@@ -144,13 +164,13 @@ public class GameController : MonoBehaviour
             //gc.TriggerEvent("Continue Queue");
             StartCoroutine(CycleQueue(2, newQueueIndex));
         }
-        else
-        {
-            uc.TriggerEvent("QUEUE DONE!");
-            TriggerTimer(true);
-            StartCoroutine(ResetQueue());
-            //reset queue and start again.
-        }
+        //else
+        //{
+        //    uc.TriggerEvent("QUEUE DONE!");
+        //    TriggerTimer(true);
+        //    StartCoroutine(ResetQueue());
+        //    //reset queue and start again.
+        //}
     }
 
     public void HandleQueueInputs(int indexedPlayer)
@@ -158,12 +178,12 @@ public class GameController : MonoBehaviour
         AddToQueue(indexedPlayer, dpad.TakeNumbList[Random.Range(0, dpad.TakeNumbList.Count)]);
         ic.hasPressedKey[indexedPlayer] = true;
 
-        if (queueObjects.Count == 4)
-        {
-            StartCoroutine(CycleQueue(1, 0));
-            //Get the action length in some way and input it to the queue ienumerator (first parameter)
-            //queue should always start on index 0
-        }
+        //if (queueObjects.Count == 4)
+        //{
+        //    StartCoroutine(CycleQueue(1, 0));
+        //    //Get the action length in some way and input it to the queue ienumerator (first parameter)
+        //    //queue should always start on index 0
+        //}
     }
 
     public void TriggerRoundStart()
