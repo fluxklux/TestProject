@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
     public bool[] hasPressedKey = { false, false, false, false };
+
     GameController gc;
 
     void Start()
@@ -14,11 +16,6 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButton("C1 Horizontal"))
-        {
-            Debug.Log("YES");
-        }
-
         if (!gc.queueFinished)
         {
             switch (Input.inputString)
@@ -53,5 +50,19 @@ public class InputController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void OnGUI()
+    {
+        var c1Hor = Input.GetAxis("C1 Horizontal");
+        var c2Hor = Input.GetAxis("C2 Horizontal");
+
+        var c1Ver = Input.GetAxis("C1 Vertical");
+        var c2Ver = Input.GetAxis("C2 Vertical");
+
+        string debugString = "P1: " + c1Hor.ToString("F2") + ", " + c1Ver.ToString("F2")
+            + "\n" + "P2: " + c2Hor.ToString("F2") + ", " + c2Ver.ToString("F2");
+
+        GUI.Label(new Rect(10, 10, 250, 200), debugString);
     }
 }
