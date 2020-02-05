@@ -6,8 +6,11 @@ using UnityEngine.InputSystem;
 public class InputController : MonoBehaviour
 {
     public bool[] hasPressedKey = { false, false, false, false };
+    [Header("DEBUG")]
+    public GUIStyle style;
 
-    GameController gc;
+    private int playersCount = 0;
+    private GameController gc;
 
     void Start()
     {
@@ -70,6 +73,6 @@ public class InputController : MonoBehaviour
         string debugString = "P1: " + c1Hor.ToString("F2") + ", " + c1Ver.ToString("F2")
             + "\n" + "P2: " + c2Hor.ToString("F2") + ", " + c2Ver.ToString("F2");
 
-        GUI.Label(new Rect(10, 10, 250, 200), debugString);
+        GUI.Label(new Rect(10, 10, 250, 200), debugString, style);
     }
 }
