@@ -1,0 +1,33 @@
+{
+    "name": "Controller 1",
+    "maps": [
+        {
+            "name": "Controller 1",
+            "id": "d9031676-8018-46a3-87eb-98c43de7677f",
+            "actions": [
+                {
+                    "name": "Button A",
+                    "type": "Button",
+                    "id": "162e2f64-b87b-4f7f-8bf9-7df7a8ecdede",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0661800d-9b1f-4a07-89d7-8030984f012f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
