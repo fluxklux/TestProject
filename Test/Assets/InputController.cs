@@ -14,6 +14,10 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetButton("C1 Horizontal"))
+        {
+            Debug.Log("YES");
+        }
 
         if (!gc.queueFinished)
         {
