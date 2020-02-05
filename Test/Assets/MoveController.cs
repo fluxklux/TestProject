@@ -29,9 +29,25 @@ public class MoveController : MonoBehaviour
         calcIndex = (int)Mathf.Repeat(calcIndex, gc.allSlots.Length);
         selectedSlot = calcIndex;
 
+        
+        //move the player to the newly calculated (and assigned) slot
         players[selectedPlayer].transform.position = gc.allSlots[selectedSlot].transform.position;
         players[selectedPlayer].GetComponent<PlayerController>().UpdatePosition(calcIndex);
 
         gc.allSlots[selectedSlot].GetComponent<SlotController>().TriggerSlotBehaviour(selectedPlayer);
+    }
+
+    void checkSelectedSlot(int slotIndex)
+    {
+
+        int amountOfPlayers = 0;
+
+        for(int i = 0; i < players.Length; i++)
+        {
+            if(players[i].GetComponent<PlayerController>().currentSlotPosition == slotIndex)
+            {
+                amountOfPlayers++;
+            }
+        }
     }
 }
