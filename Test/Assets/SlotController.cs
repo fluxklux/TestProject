@@ -39,7 +39,6 @@ public class SlotController : MonoBehaviour
                 break;
             case SlotType.miniGame:
                 //minigame
-
                 Debug.Log("minigame " + playerIndex);
                 break;
             default:
