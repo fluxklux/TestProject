@@ -7,10 +7,7 @@ public class UIController : MonoBehaviour
 {
     [Header("Player Texts")]
 
-    public Text playerOne;
-    public Text playerTwo;
-    public Text playerThree;
-    public Text playerFour;
+    public Text[] playerTexts;
 
     public Text timerText;
     public Text eventText;
@@ -24,11 +21,10 @@ public class UIController : MonoBehaviour
 
     public void UpdatePlayerFruits(int[] playerFruits)
     {
-        //byt till for loop
-        playerOne.text = "P1: " + playerFruits[0];
-        playerTwo.text = "P2: " + playerFruits[1];
-        playerThree.text = "P3: " + playerFruits[2];
-        playerFour.text = "P4: " + playerFruits[3];
+        for (int i = 0; i < playerTexts.Length; i++)
+        {
+            playerTexts[i].text = "P" + i + ": " + playerFruits[i];
+        }
     }
 
     public void DisplayTimerFloat(float timer)

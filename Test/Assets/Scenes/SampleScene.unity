@@ -270,7 +270,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: '0
+
+'
 --- !u!222 &58204155
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1247,14 +1249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66bad7ae5fe182f41aa1898dbb088df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerOne: {fileID: 1409139644}
-  playerTwo: {fileID: 58204154}
-  playerThree: {fileID: 1861246233}
-  playerFour: {fileID: 1555361847}
-  playerOneFruits: 0
-  playerTwoFruits: 0
-  playerThreeFruits: 0
-  playerFourFruits: 0
+  playerTexts:
+  - {fileID: 1409139644}
+  - {fileID: 58204154}
+  - {fileID: 1861246233}
+  - {fileID: 1555361847}
   timerText: {fileID: 668927477}
   eventText: {fileID: 661271728}
 --- !u!1 &245480063
@@ -5029,7 +5028,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: '0
+
+'
 --- !u!222 &1409139645
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5233,7 +5234,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'P4 FRUITS: 200'
+  m_Text: '0
+
+'
 --- !u!222 &1555361848
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6393,7 +6396,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: '0
+
+'
 --- !u!222 &1861246234
 CanvasRenderer:
   m_ObjectHideFlags: 0
