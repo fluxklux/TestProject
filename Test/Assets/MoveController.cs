@@ -29,25 +29,36 @@ public class MoveController : MonoBehaviour
         calcIndex = (int)Mathf.Repeat(calcIndex, gc.allSlots.Length);
         selectedSlot = calcIndex;
 
-        int playersOnSlot = checkSelectedSlot(selectedSlot);
+        checkAndUpdate(selectedSlot, selectedPlayer);
+
+        gc.allSlots[selectedSlot].GetComponent<SlotController>().TriggerSlotBehaviour(selectedPlayer);
+        //updateAllPlayers();
+    }
+
+    void checkAndUpdate(int slotIndex, int playerIndex)
+    {
+        selectedPlayer = playerIndex;
+        int temporarySelectedSlot = slotIndex;
+        int playersOnSlot = checkSelectedSlot(temporarySelectedSlot);
+
 
         switch (playersOnSlot)
         {
             case 2:
-                updatePlayerPosition(new Vector3(0, -2, 0));
+                updatePlayerPosition(new Vector3(0.25f, 0.25f, 0), temporarySelectedSlot);
                 break;
             case 3:
-                updatePlayerPosition(new Vector3(0, -2, 0));
+                updatePlayerPosition(new Vector3(-0.25f, -0.25f, 0), temporarySelectedSlot);
                 break;
             case 4:
-                updatePlayerPosition(new Vector3(0, -2, 0));
+                updatePlayerPosition(new Vector3(0.25f, -0.25f, 0), temporarySelectedSlot);
                 break;
             default:
-                updatePlayerPosition(new Vector3(0, 0, 0));
+                updatePlayerPosition(new Vector3(0, 0, 0), temporarySelectedSlot);
+                players[selectedPlayer].GetComponent<PlayerController>().isAlone = true;
+                players[selectedPlayer].GetComponent<PlayerController>().wasFirst = true;
                 break;
         }
-
-        gc.allSlots[selectedSlot].GetComponent<SlotController>().TriggerSlotBehaviour(selectedPlayer);
     }
 
     int checkSelectedSlot(int slotIndex)
@@ -64,15 +75,59 @@ public class MoveController : MonoBehaviour
         return amountOfPlayers;
     }
 
-    void updatePlayerPosition(Vector3 offset)
+    void updatePlayerPosition(Vector3 offset, int selectedSlot)
     {
         //move the player to the newly calculated (and assigned) slot
         players[selectedPlayer].transform.position = gc.allSlots[selectedSlot].transform.position + offset;
         players[selectedPlayer].GetComponent<PlayerController>().UpdatePosition(selectedSlot);
     }
 
-    void updateSoloPlayer()
+    void updateAllPlayers() //Fortsätt här please please please !!!!!!!!!!!!!!!!!!!!!!!
     {
-
+        for (int i = 0; i < players.Length; i++)
+        {
+            if(players[i].GetComponent<PlayerController>().wasFirst == true)
+            {
+                if(checkSelectedSlot(players[i].GetComponent<PlayerController>().currentSlotPosition) > 1)
+                {
+                    updatePlayerPosition(new Vector3(-0.25f, 0.25f), players[i].GetComponent<PlayerController>().currentSlotPosition);
+                }
+            }
+        }
     }
+
+    /*
+    void updateSoloPlayer(int selectedPlayerIndex, int caseNumber)
+    {
+        if(caseNumber == 1)
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].GetComponent<PlayerController>().currentSlotPosition == players[selectedPlayerIndex].GetComponent<PlayerController>().lastSlotIndex)
+                {
+                    checkAndUpdate(players[i].GetComponent<PlayerController>().currentSlotPosition, i);
+                }
+            }
+        }
+
+        else
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].GetComponent<PlayerController>().currentSlotPosition == players[selectedPlayerIndex].GetComponent<PlayerController>().currentSlotPosition)
+                {
+                    selectedPlayer = i;
+                    updatePlayerPosition(new Vector3(-0.25f, 0.25f), players[i].GetComponent<PlayerController>().currentSlotPosition);
+                }
+
+                if (players[i].GetComponent<PlayerController>().currentSlotPosition == players[selectedPlayerIndex].GetComponent<PlayerController>().lastSlotIndex)
+                {
+                    checkAndUpdate(players[i].GetComponent<PlayerController>().currentSlotPosition, i);
+                }
+            }
+        }
+        
+    }
+    */
+    
 }
