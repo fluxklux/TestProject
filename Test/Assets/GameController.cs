@@ -27,8 +27,6 @@ public class GameController : MonoBehaviour
     float timerMax = 25;
     bool countDown = false;
 
-    bool haveDone = false;
-
     InputController ic;
     UIController uc;
     MoveController mc;
@@ -67,32 +65,18 @@ public class GameController : MonoBehaviour
                 float calcFloat = timer / timerMax;
                 uiFill.fillAmount = calcFloat;
                 uc.DisplayTimerFloat(timer);
+
+                if(timer <= (timerMax - 3))
+                {
+                    ic.ChangeTakeInputBool(false);
+                }
             }
             else
             {
                 countDown = false;
                 queueFinished = true;
-                //StartCoroutine(WaitForNextRound());
-
+                StartCoroutine(WaitForNextRound());
             }
-
-            if (timer > 19 && timer < 22 && !haveDone)
-            {
-
-                if (queueObjects.Count == 4)
-                {
-                    StartCoroutine(CycleQueue(1, 0));
-                    //Get the action length in some way and input it to the queue ienumerator (first parameter)
-                    //queue should always start on index 0
-                }
-                else
-                {
-                    StartCoroutine(CycleQueue(1, 0));
-                }
-
-                haveDone = true;
-            }
-
         }
     }
 
@@ -164,13 +148,13 @@ public class GameController : MonoBehaviour
             //gc.TriggerEvent("Continue Queue");
             StartCoroutine(CycleQueue(2, newQueueIndex));
         }
-        //else
-        //{
-        //    uc.TriggerEvent("QUEUE DONE!");
-        //    TriggerTimer(true);
-        //    StartCoroutine(ResetQueue());
-        //    //reset queue and start again.
-        //}
+        else
+        {
+            uc.TriggerEvent("QUEUE DONE!");
+            TriggerTimer(true);
+            StartCoroutine(ResetQueue());
+            //reset queue and start again.
+        }
     }
 
     public void HandleQueueInputs(int indexedPlayer)
@@ -178,18 +162,19 @@ public class GameController : MonoBehaviour
         AddToQueue(indexedPlayer, dpad.TakeNumbList[Random.Range(0, dpad.TakeNumbList.Count)]);
         ic.hasPressedKey[indexedPlayer] = true;
 
-        //if (queueObjects.Count == 4)
-        //{
-        //    StartCoroutine(CycleQueue(1, 0));
-        //    //Get the action length in some way and input it to the queue ienumerator (first parameter)
-        //    //queue should always start on index 0
-        //}
+        if (queueObjects.Count == 4) //change dynamicaly from 4 to amount of players in inputController
+        {
+            StartCoroutine(CycleQueue(1, 0));
+            //Get the action length in some way and input it to the queue ienumerator (first parameter)
+            //queue should always start on index 0
+        }
     }
 
     public void TriggerRoundStart()
     {
         if (queueFinished)
         {
+            ic.ChangeTakeInputBool(true);
             TriggerTimer(false);
             uc.TriggerEvent("WAITING FOR PLAYER INPUTS");
             dpad.Randomize();

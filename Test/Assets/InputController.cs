@@ -11,23 +11,28 @@ public class InputController : MonoBehaviour
 
     private int playersCount = 0;
     private GameController gc;
+    private bool canTakeInput = true;
 
     void Start()
     {
         gc = GetComponent<GameController>();
     }
 
+    public void ChangeTakeInputBool (bool onOff)
+    {
+        canTakeInput = onOff;
+    }
+
     void Update()
     {
+        Debug.Log(canTakeInput);
+
         if (!gc.queueFinished)
         {
-
-            if (gc.timer > 22)
+            if (canTakeInput)
             {
                 switch (Input.inputString)
                 {
-                    //Random Range because we currently cant get input from the controllers so which the -
-                    //player chooses is random.
                     case "1":
                         if (!hasPressedKey[0])
                         {
@@ -55,9 +60,6 @@ public class InputController : MonoBehaviour
                     default:
                         break;
                 }
-               
-                
-
             }
         }
     }
