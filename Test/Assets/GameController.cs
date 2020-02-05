@@ -147,7 +147,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void handleQueueInputs(int indexedPlayer)
+    public void HandleQueueInputs(int indexedPlayer)
     {
         AddToQueue(indexedPlayer, dpad.TakeNumbList[Random.Range(0, dpad.TakeNumbList.Count)]);
         ic.hasPressedKey[indexedPlayer] = true;

@@ -24,25 +24,25 @@ public class InputController : MonoBehaviour
                 case "1":
                     if(!hasPressedKey[0])
                     {
-                        gc.handleQueueInputs(0);
+                        gc.HandleQueueInputs(0);
                     }
                     break;
                 case "2":
                     if (!hasPressedKey[1])
                     {
-                        gc.handleQueueInputs(1);
+                        gc.HandleQueueInputs(1);
                     }
                     break;
                 case "3":
                     if (!hasPressedKey[2])
                     {
-                        gc.handleQueueInputs(2);
+                        gc.HandleQueueInputs(2);
                     }
                     break;
                 case "4":
                     if (!hasPressedKey[3])
                     {
-                        gc.handleQueueInputs(3);
+                        gc.HandleQueueInputs(3);
                     }
                     break;
                 default:
