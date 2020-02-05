@@ -32,6 +32,10 @@ public class GameController : MonoBehaviour
     MoveController mc;
     DPad dpad;
 
+    bool doneOnce = false;
+
+
+
     void Start()
     {
         mc = GetComponent<MoveController>();
@@ -70,6 +74,15 @@ public class GameController : MonoBehaviour
                 {
                     ic.ChangeTakeInputBool(false);
                 }
+
+                if (timer <= (timerMax - 6) && !doneOnce)
+                {
+                    StartCoroutine(CycleQueue(1, 0));
+
+                    doneOnce = true;
+                }
+
+
             }
             else
             {
@@ -139,16 +152,25 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(actionLength);
         int newQueueIndex = queueIndex + 1;
 
+       if (timer > 0)
+        {
+
+       
+
         //ACTIONS HERE!
         mc.MovePlayer(queueObjects[queueIndex].playerIndex, queueObjects[queueIndex].steps);
-        //END OF ACTIONS
+            //END OF ACTIONS
+
+
+        }
+
 
         if (newQueueIndex < queueObjects.Count)
         {
             //gc.TriggerEvent("Continue Queue");
             StartCoroutine(CycleQueue(2, newQueueIndex));
         }
-        else
+        else if (timer <= 0)
         {
             uc.TriggerEvent("QUEUE DONE!");
             TriggerTimer(true);
