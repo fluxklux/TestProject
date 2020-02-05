@@ -1175,6 +1175,7 @@ MonoBehaviour:
   - {fileID: 574167668}
   queueObjects: []
   queueFinished: 1
+  timer: 0
 --- !u!4 &244171779
 Transform:
   m_ObjectHideFlags: 0
@@ -1204,8 +1205,6 @@ MonoBehaviour:
   players:
   - {fileID: 1077105371}
   - {fileID: 169964696}
-  - {fileID: 380919387}
-  - {fileID: 751090606}
 --- !u!114 &244171781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1300,10 +1299,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numbers:
   - {fileID: 211346760}
-  - {fileID: 1358766263}
   - {fileID: 82140148}
   - {fileID: 1670364956}
-  TakeNumbList: 
+  - {fileID: 1358766263}
 --- !u!114 &244171783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1819,7 +1817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &380919388
 Transform:
   m_ObjectHideFlags: 0
@@ -3174,7 +3172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &751090607
 Transform:
   m_ObjectHideFlags: 0
@@ -4434,8 +4432,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1154117927}
-  - {fileID: 1639801801}
   - {fileID: 1604868896}
+  - {fileID: 1639801801}
   - {fileID: 2037990268}
   m_Father: {fileID: 276814685}
   m_RootOrder: 2
@@ -5422,7 +5420,7 @@ RectTransform:
   - {fileID: 920085325}
   - {fileID: 82140147}
   m_Father: {fileID: 1178546555}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5584,7 +5582,7 @@ RectTransform:
   - {fileID: 1785351819}
   - {fileID: 1670364955}
   m_Father: {fileID: 1178546555}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

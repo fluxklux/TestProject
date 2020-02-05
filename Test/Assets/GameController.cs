@@ -157,12 +157,13 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void HandleQueueInputs(int indexedPlayer)
+    public void HandleQueueInputs(int indexedPlayer, int dpadIndex)
     {
-        AddToQueue(indexedPlayer, dpad.TakeNumbList[Random.Range(0, dpad.TakeNumbList.Count)]);
+        //AddToQueue(indexedPlayer, dpad.TakeNumbList[Random.Range(0, dpad.TakeNumbList.Count)]);
+        AddToQueue(indexedPlayer, dpad.GetDPadNum(dpadIndex));
         ic.hasPressedKey[indexedPlayer] = true;
 
-        if (queueObjects.Count == 4) //change dynamicaly from 4 to amount of players in inputController
+        if (queueObjects.Count == 2) //change dynamicaly from 4 to amount of players in inputController
         {
             StartCoroutine(CycleQueue(1, 0));
             //Get the action length in some way and input it to the queue ienumerator (first parameter)

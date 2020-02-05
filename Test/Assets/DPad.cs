@@ -7,10 +7,13 @@ public class DPad : MonoBehaviour
 {
     public Text[] numbers;
 
-    int randomInt;
+    private int randomInt;
+    private List<int> TakeNumbList = new List<int>();
 
-    [HideInInspector]
-    public List<int> TakeNumbList = new List<int>();
+    public int GetDPadNum (int index)
+    {
+        return TakeNumbList[index];
+    }
 
     public void Randomize()
     {

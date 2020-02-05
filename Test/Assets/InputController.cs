@@ -9,12 +9,14 @@ public class InputController : MonoBehaviour
     [Header("DEBUG")]
     public GUIStyle style;
 
-    private int playersCount = 0;
+    //private int playersCount = 0;
     private GameController gc;
+    private DPad dc;
     private bool canTakeInput = true;
 
     void Start()
     {
+        dc = GetComponent<DPad>();
         gc = GetComponent<GameController>();
     }
 
@@ -25,40 +27,89 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(canTakeInput);
-
         if (!gc.queueFinished)
         {
             if (canTakeInput)
             {
+                //för plebsen utan xbox controllers. lmao
                 switch (Input.inputString)
+                    {
+                        case "1":
+                            if (!hasPressedKey[0])
+                            {
+                                gc.HandleQueueInputs(0, dc.GetDPadNum(Random.Range(0, 5)));
+                            }
+                            break;
+                        case "2":
+                            if (!hasPressedKey[1])
+                            {
+                                gc.HandleQueueInputs(1, dc.GetDPadNum(Random.Range(0, 5)));
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                //p1
+                if (!hasPressedKey[0])
                 {
-                    case "1":
-                        if (!hasPressedKey[0])
-                        {
-                            gc.HandleQueueInputs(0);
-                        }
-                        break;
-                    case "2":
-                        if (!hasPressedKey[1])
-                        {
-                            gc.HandleQueueInputs(1);
-                        }
-                        break;
-                    case "3":
-                        if (!hasPressedKey[2])
-                        {
-                            gc.HandleQueueInputs(2);
-                        }
-                        break;
-                    case "4":
-                        if (!hasPressedKey[3])
-                        {
-                            gc.HandleQueueInputs(3);
-                        }
-                        break;
-                    default:
-                        break;
+                    var c1Horizontal = Input.GetAxis("C1 Horizontal");
+                    var c1Vertical = Input.GetAxis("C1 Vertical");
+                
+                    switch(c1Horizontal)
+                    {
+                        case 1:
+                            gc.HandleQueueInputs(0, 1); //right
+                            break;
+                        case -1:
+                            gc.HandleQueueInputs(0, 3);//left
+                            break;
+                        default:
+                            break;
+                    }
+
+                    switch (c1Vertical)
+                    {
+                        case 1:
+                            gc.HandleQueueInputs(0, 0); //up
+                            break;
+                        case -1:
+                            gc.HandleQueueInputs(0, 2);//down
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                //p2
+                if (!hasPressedKey[1])
+                {
+                    var c2Horizontal = Input.GetAxis("C2 Horizontal");
+                    var c2Vertical = Input.GetAxis("C2 Vertical");
+
+                    switch (c2Horizontal)
+                    {
+                        case 1:
+                            gc.HandleQueueInputs(1, 1); //right
+                            break;
+                        case -1:
+                            gc.HandleQueueInputs(1, 3);//left
+                            break;
+                        default:
+                            break;
+                    }
+
+                    switch (c2Vertical)
+                    {
+                        case 1:
+                            gc.HandleQueueInputs(1, 0); //up
+                            break;
+                        case -1:
+                            gc.HandleQueueInputs(1, 2);//down
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
