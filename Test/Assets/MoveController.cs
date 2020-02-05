@@ -10,7 +10,6 @@ public class MoveController : MonoBehaviour
     UIController uc;
     int selectedPlayer = 0;
     int selectedSlot = 0;
-    string moveAmount;
 
     void Start()
     {
@@ -20,6 +19,7 @@ public class MoveController : MonoBehaviour
 
     public void MovePlayer(int playerIndex, int steps)
     {
+
         selectedPlayer = playerIndex;
 
         //event
@@ -29,18 +29,30 @@ public class MoveController : MonoBehaviour
         calcIndex = (int)Mathf.Repeat(calcIndex, gc.allSlots.Length);
         selectedSlot = calcIndex;
 
-        
-        //move the player to the newly calculated (and assigned) slot
-        players[selectedPlayer].transform.position = gc.allSlots[selectedSlot].transform.position;
-        players[selectedPlayer].GetComponent<PlayerController>().UpdatePosition(calcIndex);
+        int playersOnSlot = checkSelectedSlot(selectedSlot);
+
+        switch (playersOnSlot)
+        {
+            case 2:
+                updatePlayerPosition(new Vector3(0, -2, 0));
+                break;
+            case 3:
+                updatePlayerPosition(new Vector3(0, -2, 0));
+                break;
+            case 4:
+                updatePlayerPosition(new Vector3(0, -2, 0));
+                break;
+            default:
+                updatePlayerPosition(new Vector3(0, 0, 0));
+                break;
+        }
 
         gc.allSlots[selectedSlot].GetComponent<SlotController>().TriggerSlotBehaviour(selectedPlayer);
     }
 
-    void checkSelectedSlot(int slotIndex)
+    int checkSelectedSlot(int slotIndex)
     {
-
-        int amountOfPlayers = 0;
+        int amountOfPlayers = 1;
 
         for(int i = 0; i < players.Length; i++)
         {
@@ -49,5 +61,18 @@ public class MoveController : MonoBehaviour
                 amountOfPlayers++;
             }
         }
+        return amountOfPlayers;
+    }
+
+    void updatePlayerPosition(Vector3 offset)
+    {
+        //move the player to the newly calculated (and assigned) slot
+        players[selectedPlayer].transform.position = gc.allSlots[selectedSlot].transform.position + offset;
+        players[selectedPlayer].GetComponent<PlayerController>().UpdatePosition(selectedSlot);
+    }
+
+    void updateSoloPlayer()
+    {
+
     }
 }
