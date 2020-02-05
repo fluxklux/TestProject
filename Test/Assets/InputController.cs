@@ -37,14 +37,14 @@ public class InputController : MonoBehaviour
                         case "1":
                             if (!hasPressedKey[0])
                             {
-                                gc.HandleQueueInputs(0, dc.GetDPadNum(Random.Range(0, 5)));
+                                gc.HandleQueueInputs(0, 0);
                             }
                             break;
                         case "2":
                             if (!hasPressedKey[1])
                             {
-                                gc.HandleQueueInputs(1, dc.GetDPadNum(Random.Range(0, 5)));
-                            }
+                            gc.HandleQueueInputs(1, 0);
+                        }
                             break;
                         default:
                             break;
