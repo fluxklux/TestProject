@@ -40,17 +40,13 @@ public class MoveController : MonoBehaviour
     void checkSelectedSlot(int slotIndex)
     {
 
-        gc.allSlots[slotIndex] = gc.allSlots[slotIndex + 1];
-
+        int amountOfPlayers = 0;
 
         for(int i = 0; i < players.Length; i++)
         {
-            for(int j = i + 1; j < players.Length; j++)
+            if(players[i].GetComponent<PlayerController>().currentSlotPosition == slotIndex)
             {
-                if (players[i].GetComponent<PlayerController>().currentSlotPosition == players[j].GetComponent<PlayerController>().currentSlotPosition)
-                {
-                    
-                }
+                amountOfPlayers++;
             }
         }
     }
