@@ -43,7 +43,6 @@ public class GameController : MonoBehaviour
 
     public void ChangeFruitAmount (int playerIndex, int amount)
     {
-        //+ fungerar för + (-10) blir minus.
         playerFruits[playerIndex] += amount;
 
         if(playerFruits[playerIndex] < 0)
@@ -67,16 +66,12 @@ public class GameController : MonoBehaviour
                 uiFill.fillAmount = calcFloat;
                 uc.DisplayTimerFloat(timer);
 
-                if(timer <= (timerMax - 3))
-                {
-                    ic.ChangeTakeInputBool(false);
-                }
-
-                if (timer <= (timerMax - 3) && !doneOnce)
+                if(timer <= (timerMax - 3) && !doneOnce)
                 {
                     StartCoroutine(WaitForNextRound());
                     //StartCoroutine(CycleQueue(1, 0));
                     doneOnce = true;
+                    ic.ChangeTakeInputBool(false);
                 }
             }
             else
@@ -94,11 +89,13 @@ public class GameController : MonoBehaviour
 
         if(queueObjects.Count > 0)
         {
+            Debug.Log("Has input");
             StartCoroutine(CycleQueue(1, 0));
         }
         else
         {
             Debug.Log("No input");
+            TriggerTimer(true);
             StartCoroutine(ResetQueue());
         }
     }
@@ -118,7 +115,6 @@ public class GameController : MonoBehaviour
 
     public void AddToQueue(int playerIndex, int steps)
     {
-        //sets the variables from the actions to the queueObject.
         QueueObject newQueueObject = new QueueObject();
         newQueueObject.playerIndex = playerIndex;
         newQueueObject.steps = steps;
@@ -130,6 +126,7 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         uc.TriggerEvent("RESETING QUEUE...");
+        //TriggerTimer(true);
 
         yield return new WaitForSeconds(3);
         queueObjects.Clear();
@@ -147,31 +144,23 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(actionLength);
         int newQueueIndex = queueIndex + 1;
-
-        if (timer > 0)
-        { 
-            //ACTIONS HERE!
-            mc.MovePlayer(queueObjects[queueIndex].playerIndex, queueObjects[queueIndex].steps);
-            //END OF ACTIONS
-        }
+        
+        mc.MovePlayer(queueObjects[queueIndex].playerIndex, queueObjects[queueIndex].steps);
 
         if (newQueueIndex < queueObjects.Count)
         {
-            //gc.TriggerEvent("Continue Queue");
             StartCoroutine(CycleQueue(2, newQueueIndex));
         }
-        else if (timer <= 0)
+        else
         {
             uc.TriggerEvent("QUEUE DONE!");
-            TriggerTimer(true);
+            //TriggerTimer(true);
             StartCoroutine(ResetQueue());
-            //reset queue and start again.
         }
     }
 
     public void HandleQueueInputs(int indexedPlayer, int dpadIndex)
     {
-        //AddToQueue(indexedPlayer, dpad.TakeNumbList[Random.Range(0, dpad.TakeNumbList.Count)]);
         AddToQueue(indexedPlayer, dpad.GetDPadNum(dpadIndex));
         ic.hasPressedKey[indexedPlayer] = true;
 
@@ -189,6 +178,7 @@ public class GameController : MonoBehaviour
         if (queueFinished)
         {
             ic.ChangeTakeInputBool(true);
+            doneOnce = false;
             TriggerTimer(false);
             uc.TriggerEvent("WAITING FOR PLAYER INPUTS");
             dpad.Randomize();
