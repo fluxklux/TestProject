@@ -24,17 +24,14 @@ public class GameController : MonoBehaviour
     int[] playerFruits = { 0, 0, 0, 0 };
 
     [HideInInspector] public float timer;
-    float timerMax = 25;
+    float timerMax = 30;
     bool countDown = false;
 
     InputController ic;
     UIController uc;
     MoveController mc;
     DPad dpad;
-
     bool doneOnce = false;
-
-
 
     void Start()
     {
@@ -75,14 +72,12 @@ public class GameController : MonoBehaviour
                     ic.ChangeTakeInputBool(false);
                 }
 
-                if (timer <= (timerMax - 6) && !doneOnce)
+                if (timer <= (timerMax - 3) && !doneOnce)
                 {
-                    StartCoroutine(CycleQueue(1, 0));
-
+                    StartCoroutine(WaitForNextRound());
+                    //StartCoroutine(CycleQueue(1, 0));
                     doneOnce = true;
                 }
-
-
             }
             else
             {
@@ -103,6 +98,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            Debug.Log("No input");
             StartCoroutine(ResetQueue());
         }
     }
@@ -152,18 +148,12 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(actionLength);
         int newQueueIndex = queueIndex + 1;
 
-       if (timer > 0)
-        {
-
-       
-
-        //ACTIONS HERE!
-        mc.MovePlayer(queueObjects[queueIndex].playerIndex, queueObjects[queueIndex].steps);
+        if (timer > 0)
+        { 
+            //ACTIONS HERE!
+            mc.MovePlayer(queueObjects[queueIndex].playerIndex, queueObjects[queueIndex].steps);
             //END OF ACTIONS
-
-
         }
-
 
         if (newQueueIndex < queueObjects.Count)
         {
@@ -185,12 +175,13 @@ public class GameController : MonoBehaviour
         AddToQueue(indexedPlayer, dpad.GetDPadNum(dpadIndex));
         ic.hasPressedKey[indexedPlayer] = true;
 
-        if (queueObjects.Count == 2) //change dynamicaly from 4 to amount of players in inputController
+        //dont remove plz
+        /*if (queueObjects.Count == 2) //change dynamicaly from 4 to amount of players in inputController
         {
             StartCoroutine(CycleQueue(1, 0));
             //Get the action length in some way and input it to the queue ienumerator (first parameter)
             //queue should always start on index 0
-        }
+        }*/
     }
 
     public void TriggerRoundStart()
