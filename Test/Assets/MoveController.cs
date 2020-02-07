@@ -19,17 +19,15 @@ public class MoveController : MonoBehaviour
 
     public void MovePlayer(int playerIndex, int steps)
     {
-
         selectedPlayer = playerIndex;
-
         uc.TriggerEvent("MOVE P" + (playerIndex + 1) + ": " + steps + " STEPS");
 
         int calcIndex = players[selectedPlayer].GetComponent<PlayerController>().currentSlotPosition + steps;
         calcIndex = (int)Mathf.Repeat(calcIndex, gc.allSlots.Length);
         selectedSlot = calcIndex;
-
         checkAndUpdate(selectedSlot, selectedPlayer);
 
+        selectedPlayer = playerIndex;
         gc.allSlots[selectedSlot].GetComponent<SlotController>().TriggerSlotBehaviour(selectedPlayer);
     }
 
@@ -38,7 +36,6 @@ public class MoveController : MonoBehaviour
         selectedPlayer = playerIndex;
         int temporarySelectedSlot = slotIndex;
         int playersOnSlot = checkSelectedSlot(temporarySelectedSlot);
-
 
         switch (playersOnSlot)
         {
@@ -100,7 +97,6 @@ public class MoveController : MonoBehaviour
                 }
             }
 
-            
             if (checkSelectedSlot(players[i].GetComponent<PlayerController>().lastSlotIndex) == 1)
             {
                 for(int j = 0; j < players.Length; j++)
@@ -114,9 +110,6 @@ public class MoveController : MonoBehaviour
                     }
                 }
             }
-            
-
-
         }
     }
 }
