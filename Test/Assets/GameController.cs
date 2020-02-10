@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     MoveController mc;
     DPad dpad;
     bool doneOnce = false;
+    bool debugMode = false;
 
     private void Start()
     {
@@ -59,8 +60,25 @@ public class GameController : MonoBehaviour
         uc.UpdatePlayerFruits(playerFruits);
     }
 
+    private void ToggleDebugMode (bool toggle)
+    {
+        for (int i = 0; i < allSlots.Length; i++)
+        {
+            allSlots[i].GetComponentInChildren<SpriteRenderer>().enabled = toggle;
+        }
+
+        ic.debugMode = toggle;
+    }
+
     private void Update()
     {
+        //Debug
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            debugMode = !debugMode;
+            ToggleDebugMode(debugMode);
+        }
+
         if(countDown)
         {
             if(timer > 0 )
@@ -131,7 +149,7 @@ public class GameController : MonoBehaviour
     private IEnumerator ResetQueue()
     {
         yield return new WaitForSeconds(0.5f);
-        uc.TriggerEvent("RESETING QUEUE...");
+        uc.TriggerEvent("<color=yellow>RESETING QUEUE... </color>");
         //TriggerTimer(true);
 
         yield return new WaitForSeconds(3);
@@ -143,7 +161,7 @@ public class GameController : MonoBehaviour
         }
 
         queueFinished = true;
-        uc.TriggerEvent("QUEUE RESET!");
+        uc.TriggerEvent("<color=green>QUEUE RESET!</color>");
     }
 
     private IEnumerator CycleQueue(float actionLength, int queueIndex)
@@ -186,7 +204,7 @@ public class GameController : MonoBehaviour
             ic.ChangeTakeInputBool(true);
             doneOnce = false;
             TriggerTimer(false);
-            uc.TriggerEvent("<color=green>WAITING FOR PLAYER INPUTS</color>");
+            uc.TriggerEvent("<color=green>WAITING FOR PLAYER INPUTS...</color>");
             dpad.Randomize();
             queueFinished = false;
         }

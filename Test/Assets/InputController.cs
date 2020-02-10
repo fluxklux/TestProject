@@ -13,6 +13,9 @@ public class InputController : MonoBehaviour
 
     public GameObject[] allPlayers = { };
 
+    [HideInInspector]
+    public bool debugMode = false;
+
     [Header("DEBUG")]
     public GUIStyle style;
     
@@ -280,21 +283,24 @@ public class InputController : MonoBehaviour
 
     private void OnGUI()
     {
-        var c1Hor = Input.GetAxis("C1 Horizontal");
-        var c2Hor = Input.GetAxis("C2 Horizontal");
-        var c3Hor = Input.GetAxis("C3 Horizontal");
-        var c4Hor = Input.GetAxis("C4 Horizontal");
+        if(debugMode)
+        {
+            var c1Hor = Input.GetAxis("C1 Horizontal");
+            var c2Hor = Input.GetAxis("C2 Horizontal");
+            var c3Hor = Input.GetAxis("C3 Horizontal");
+            var c4Hor = Input.GetAxis("C4 Horizontal");
 
-        var c1Ver = Input.GetAxis("C1 Vertical");
-        var c2Ver = Input.GetAxis("C2 Vertical");
-        var c3Ver = Input.GetAxis("C3 Vertical");
-        var c4Ver = Input.GetAxis("C4 Vertical");
+            var c1Ver = Input.GetAxis("C1 Vertical");
+            var c2Ver = Input.GetAxis("C2 Vertical");
+            var c3Ver = Input.GetAxis("C3 Vertical");
+            var c4Ver = Input.GetAxis("C4 Vertical");
 
-        string debugString = "P1: " + c1Hor.ToString("F2") + ", " + c1Ver.ToString("F2")
-            + "\n" + "P2: " + c2Hor.ToString("F2") + ", " + c2Ver.ToString("F2")
-            + "\n" + "P3: " + c3Hor.ToString("F2") + ", " + c3Ver.ToString("F2")
-            + "\n" + "P4: " + c4Hor.ToString("F2") + ", " + c4Ver.ToString("F2");
+            string debugString = "P1: " + c1Hor.ToString("F2") + ", " + c1Ver.ToString("F2")
+                + "\n" + "P2: " + c2Hor.ToString("F2") + ", " + c2Ver.ToString("F2")
+                + "\n" + "P3: " + c3Hor.ToString("F2") + ", " + c3Ver.ToString("F2")
+                + "\n" + "P4: " + c4Hor.ToString("F2") + ", " + c4Ver.ToString("F2");
 
-        GUI.Label(new Rect(10, 10, 250, 200), debugString, style);
+            GUI.Label(new Rect(10, 10, 250, 200), debugString, style);
+        }
     }
 }
