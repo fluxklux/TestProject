@@ -95,12 +95,12 @@ public class GameController : MonoBehaviour
 
         if(queueObjects.Count > 0)
         {
-            Debug.Log("Has input");
+            //Debug.Log("Has input");
             StartCoroutine(CycleQueue(1, 0));
         }
         else
         {
-            Debug.Log("No input");
+            //Debug.Log("No input");
             TriggerTimer(true);
             StartCoroutine(ResetQueue());
         }
@@ -186,7 +186,7 @@ public class GameController : MonoBehaviour
             ic.ChangeTakeInputBool(true);
             doneOnce = false;
             TriggerTimer(false);
-            uc.TriggerEvent("WAITING FOR PLAYER INPUTS");
+            uc.TriggerEvent("<color=green>WAITING FOR PLAYER INPUTS</color>");
             dpad.Randomize();
             queueFinished = false;
         }

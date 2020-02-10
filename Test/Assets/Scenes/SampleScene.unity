@@ -1474,6 +1474,8 @@ MonoBehaviour:
   players:
   - {fileID: 1077105371}
   - {fileID: 169964696}
+  - {fileID: 380919387}
+  - {fileID: 751090606}
 --- !u!114 &244171781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,7 +1598,6 @@ MonoBehaviour:
   - {fileID: 1110654251}
   - {fileID: 1250216248}
   - {fileID: 722554708}
-  - {fileID: 413013539}
   connectionPanelsNotJoined:
   - {fileID: 413013539}
   - {fileID: 729196755}
@@ -1608,6 +1609,11 @@ MonoBehaviour:
   - {fileID: 99872122}
   - {fileID: 495085328}
   connectionPanel: {fileID: 657881111}
+  visuals:
+  - {fileID: 1699662370}
+  - {fileID: 1178546554}
+  - {fileID: 660527158}
+  - {fileID: 661271726}
   timerText: {fileID: 668927477}
   eventText: {fileID: 661271728}
 --- !u!1 &245480063
@@ -3683,7 +3689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &660527159
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3815,7 +3821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &661271727
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5880,7 +5886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1178546555
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8021,7 +8027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1699662371
 RectTransform:
   m_ObjectHideFlags: 0

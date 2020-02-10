@@ -39,13 +39,12 @@ public class InputController : MonoBehaviour
 
     public void AddPlayer (int index)
     {
-        Debug.Log("Entered AddPlayer Function");
         if(playerCount < 4)
         {
             //add events
             playerCount++;
             hasJoined[index] = true;
-            uc.TogglePlayerUi(index, true);
+            uc.TogglePlayerUi(index);
 
             //add mechanical functions
             //KAN INTE DYNAMISKT LÄGGA TILL OCH TA BORT SPELAR OBJEKTEN FÖR DEM LIGGER-
@@ -87,25 +86,32 @@ public class InputController : MonoBehaviour
                 {
                     StartGame();
                 }
+
+                if (Input.GetButtonDown("C4 Start"))
+                {
+                    StartGame();
+                }
             }
 
             //Connect players
             if(Input.GetButtonDown("C1 Select") && !hasJoined[0])
             {
-                Debug.Log("CONTROLLER 1");
                 AddPlayer(0);
             }
 
             if (Input.GetButtonDown("C2 Select") && !hasJoined[1])
             {
-                Debug.Log("CONTROLELR 2");
                 AddPlayer(1);
             }
 
             if (Input.GetButtonDown("C3 Select") && !hasJoined[2])
             {
-                Debug.Log("CONTROLELR 3");
                 AddPlayer(2);
+            }
+
+            if (Input.GetButtonDown("C4 Select") && !hasJoined[3])
+            {
+                AddPlayer(3);
             }
         }
 
@@ -135,12 +141,18 @@ public class InputController : MonoBehaviour
                             gc.HandleQueueInputs(2, 0);
                         }
                         break;
+                    case "4":
+                        if (!hasPressedKey[3])
+                        {
+                            gc.HandleQueueInputs(3, 0);
+                        }
+                        break;
                     default:
                         break;
                 }
 
                 //p1
-                if (playerCount > 0 && !hasPressedKey[0])
+                if (hasJoined[0] && !hasPressedKey[0])
                 {
                     var c1Horizontal = Input.GetAxis("C1 Horizontal");
                     var c1Vertical = Input.GetAxis("C1 Vertical");
@@ -171,7 +183,7 @@ public class InputController : MonoBehaviour
                 }
 
                 //p2
-                if (playerCount > 1 && !hasPressedKey[1])
+                if (hasJoined[1] && !hasPressedKey[1])
                 {
                     var c2Horizontal = Input.GetAxis("C2 Horizontal");
                     var c2Vertical = Input.GetAxis("C2 Vertical");
@@ -202,7 +214,7 @@ public class InputController : MonoBehaviour
                 }
 
                 //p3
-                if (playerCount > 2 && !hasPressedKey[2])
+                if (hasJoined[2] && !hasPressedKey[2])
                 {
                     var c3Horizontal = Input.GetAxis("C3 Horizontal");
                     var c3Vertical = Input.GetAxis("C3 Vertical");
@@ -231,6 +243,37 @@ public class InputController : MonoBehaviour
                             break;
                     }
                 }
+
+                //p4
+                if (hasJoined[3] && !hasPressedKey[3])
+                {
+                    var c4Horizontal = Input.GetAxis("C4 Horizontal");
+                    var c4Vertical = Input.GetAxis("C4 Vertical");
+
+                    switch (c4Horizontal)
+                    {
+                        case 1:
+                            gc.HandleQueueInputs(3, 1); //right
+                            break;
+                        case -1:
+                            gc.HandleQueueInputs(3, 3);//left
+                            break;
+                        default:
+                            break;
+                    }
+
+                    switch (c4Vertical)
+                    {
+                        case 1:
+                            gc.HandleQueueInputs(3, 0); //up
+                            break;
+                        case -1:
+                            gc.HandleQueueInputs(3, 2);//down
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
     }
@@ -240,14 +283,17 @@ public class InputController : MonoBehaviour
         var c1Hor = Input.GetAxis("C1 Horizontal");
         var c2Hor = Input.GetAxis("C2 Horizontal");
         var c3Hor = Input.GetAxis("C3 Horizontal");
+        var c4Hor = Input.GetAxis("C4 Horizontal");
 
         var c1Ver = Input.GetAxis("C1 Vertical");
         var c2Ver = Input.GetAxis("C2 Vertical");
         var c3Ver = Input.GetAxis("C3 Vertical");
+        var c4Ver = Input.GetAxis("C4 Vertical");
 
         string debugString = "P1: " + c1Hor.ToString("F2") + ", " + c1Ver.ToString("F2")
             + "\n" + "P2: " + c2Hor.ToString("F2") + ", " + c2Ver.ToString("F2")
-            + "\n" + "P3: " + c3Hor.ToString("F2") + ", " + c3Ver.ToString("F2");
+            + "\n" + "P3: " + c3Hor.ToString("F2") + ", " + c3Ver.ToString("F2")
+            + "\n" + "P4: " + c4Hor.ToString("F2") + ", " + c4Ver.ToString("F2");
 
         GUI.Label(new Rect(10, 10, 250, 200), debugString, style);
     }

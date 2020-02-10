@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     public GameObject[] connectionPanelsNotJoined;//vidrigt, fixa längre fram
     public GameObject[] connectionPanelsJoined;//vidrigt, fixa längre fram
     public GameObject connectionPanel;
+    public GameObject[] visuals;
 
     public Text timerText;
     public Text eventText;
@@ -21,9 +22,9 @@ public class UIController : MonoBehaviour
         gc = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
-    public void TogglePlayerUi (int index, bool onOff)
+    public void TogglePlayerUi (int index)
     {
-        playerTexts[index].SetActive(onOff);
+        playerTexts[index].SetActive(true);
         connectionPanelsNotJoined[index].SetActive(false);
         connectionPanelsJoined[index].SetActive(true);
     }
@@ -31,6 +32,11 @@ public class UIController : MonoBehaviour
     public void ToggleConnectionUi (bool onOff)
     {
         connectionPanel.SetActive(onOff);
+
+        for (int i = 0; i < visuals.Length; i++)
+        {
+            visuals[i].SetActive(true);
+        }
     }
 
     public void UpdatePlayerFruits(int[] playerFruits)
