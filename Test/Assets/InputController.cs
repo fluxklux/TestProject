@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour
     private GameController gc;
     private DPad dc;
     private bool canTakeInput = true;
+    private int playerCount = 0;
 
     void Start()
     {
@@ -25,7 +26,12 @@ public class InputController : MonoBehaviour
         canTakeInput = onOff;
     }
 
-    void Update()
+    public void AddPlayer ()
+    {
+
+    }
+
+    private void Update()
     {
         if (!gc.queueFinished)
         {
@@ -43,15 +49,15 @@ public class InputController : MonoBehaviour
                         case "2":
                             if (!hasPressedKey[1])
                             {
-                            gc.HandleQueueInputs(1, 0);
-                        }
+                                gc.HandleQueueInputs(1, 0);
+                            }
                             break;
                         default:
                             break;
                     }
 
                 //p1
-                if (!hasPressedKey[0])
+                if (playerCount > 0 && !hasPressedKey[0])
                 {
                     var c1Horizontal = Input.GetAxis("C1 Horizontal");
                     var c1Vertical = Input.GetAxis("C1 Vertical");
@@ -82,7 +88,7 @@ public class InputController : MonoBehaviour
                 }
 
                 //p2
-                if (!hasPressedKey[1])
+                if (playerCount > 1 && !hasPressedKey[1])
                 {
                     var c2Horizontal = Input.GetAxis("C2 Horizontal");
                     var c2Vertical = Input.GetAxis("C2 Vertical");

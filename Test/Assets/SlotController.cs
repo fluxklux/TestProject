@@ -10,7 +10,7 @@ public class SlotController : MonoBehaviour
     UIController uc;
     new SpriteRenderer renderer;
 
-    void Start()
+    private void Start()
     {
         renderer = GetComponentInChildren<SpriteRenderer>();
         gc = Object.FindObjectOfType<GameController>();

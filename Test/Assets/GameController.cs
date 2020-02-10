@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     DPad dpad;
     bool doneOnce = false;
 
-    void Start()
+    private void Start()
     {
         mc = GetComponent<MoveController>();
         uc = GetComponent<UIController>();
@@ -59,7 +59,7 @@ public class GameController : MonoBehaviour
         uc.UpdatePlayerFruits(playerFruits);
     }
 
-    void Update()
+    private void Update()
     {
         if(countDown)
         {
@@ -128,7 +128,7 @@ public class GameController : MonoBehaviour
         queueObjects.Add(newQueueObject);
     }
 
-    IEnumerator ResetQueue()
+    private IEnumerator ResetQueue()
     {
         yield return new WaitForSeconds(0.5f);
         uc.TriggerEvent("RESETING QUEUE...");
@@ -146,7 +146,7 @@ public class GameController : MonoBehaviour
         uc.TriggerEvent("QUEUE RESET!");
     }
 
-    IEnumerator CycleQueue(float actionLength, int queueIndex)
+    private IEnumerator CycleQueue(float actionLength, int queueIndex)
     {
         yield return new WaitForSeconds(actionLength);
         int newQueueIndex = queueIndex + 1;
