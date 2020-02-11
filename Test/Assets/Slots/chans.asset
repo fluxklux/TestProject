@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: chans
   m_EditorClassIdentifier: 
   slotType: 4
+  color: {r: 0.6206785, g: 0.05339978, b: 0.754717, a: 1}

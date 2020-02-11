@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: plusThree
   m_EditorClassIdentifier: 
   slotType: 0
-  color: {r: 0.22067462, g: 0.3444314, b: 0.5377358, a: 1}
-  chance: 0
+  color: {r: 0, g: 0.67276335, b: 1, a: 1}
