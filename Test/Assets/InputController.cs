@@ -9,7 +9,6 @@ public class InputController : MonoBehaviour
     public int playerCount = 0;
     public bool[] hasPressedKey = { false, false, false, false };
     public bool[] hasJoined = { false, false, false, false };
-    public int[] playerArray = { 0, 1, 2, 3 };
 
     public GameObject[] allPlayers = { };
 
@@ -50,6 +49,8 @@ public class InputController : MonoBehaviour
             uc.TogglePlayerUi(index);
 
             //add mechanical functions
+                
+
             //KAN INTE DYNAMISKT LÄGGA TILL OCH TA BORT SPELAR OBJEKTEN FÖR DEM LIGGER-
             //I GAMECONTROLLER OCH JAG MÅSTE ÄNDRA SPELAR ARRAYEN TILL EN LIST. BEHÖVER-
             //VIKBERG I SAMMA RUM FÖR DET. SÅ GITEN INTE FÅR MERGE-FEL.
@@ -75,6 +76,7 @@ public class InputController : MonoBehaviour
             //Start Game
             if(playerCount >= 2)
             {
+                //Kan inte använda switch i getbutton down.
                 if(Input.GetButtonDown("C1 Start"))
                 {
                     StartGame();
@@ -91,6 +93,12 @@ public class InputController : MonoBehaviour
                 }
 
                 if (Input.GetButtonDown("C4 Start"))
+                {
+                    StartGame();
+                }
+
+                //keyboard
+                if(Input.GetKeyDown(KeyCode.Return))
                 {
                     StartGame();
                 }
@@ -115,6 +123,37 @@ public class InputController : MonoBehaviour
             if (Input.GetButtonDown("C4 Select") && !hasJoined[3])
             {
                 AddPlayer(3);
+            }
+
+            //keyboard
+            switch (Input.inputString)
+            {
+                case "q":
+                    if (!hasJoined[0])
+                    {
+                        AddPlayer(0);
+                    }
+                    break;
+                case "w":
+                    if (!hasJoined[1])
+                    {
+                        AddPlayer(1);
+                    }
+                    break;
+                case "e":
+                    if (!hasJoined[2])
+                    {
+                        AddPlayer(2);
+                    }
+                    break;
+                case "r":
+                    if (!hasJoined[3])
+                    {
+                        AddPlayer(3);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
