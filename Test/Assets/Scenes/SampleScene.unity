@@ -1394,7 +1394,7 @@ GameObject:
   - component: {fileID: 244171784}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1645,7 +1645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b67c7e01df47a914fbe98bfd10d73aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allMinigames: []
 --- !u!1 &245480063
 GameObject:
   m_ObjectHideFlags: 0
