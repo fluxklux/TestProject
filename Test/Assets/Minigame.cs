@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Minigame
+public enum MinigameType { ButtonMash, Test}
+
+[CreateAssetMenu(fileName = "new Minigame", menuName = "Custom/Minigame")]
+public class Minigame : ScriptableObject
 {
-    public virtual void TriggerMinigame ()
-    {
-        Debug.Log("Minigame: BASE");
-    }
+    public MinigameType minigameType;
 }
