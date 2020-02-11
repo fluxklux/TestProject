@@ -22,13 +22,38 @@ public class MoveController : MonoBehaviour
         selectedPlayer = playerIndex;
         uc.TriggerEvent("MOVE P" + (playerIndex + 1) + ": " + steps + " STEPS");
 
+        /*
         int calcIndex = players[selectedPlayer].GetComponent<PlayerController>().currentSlotPosition + steps;
         calcIndex = (int)Mathf.Repeat(calcIndex, gc.allSlots.Length);
         selectedSlot = calcIndex;
-        checkAndUpdate(selectedSlot, selectedPlayer);
+        */
+
+        StartCoroutine(cycleSteps(playerIndex, steps));
+
+        //checkAndUpdate(selectedSlot, selectedPlayer);
+    }
+
+    private IEnumerator cycleSteps(int playerIndex, int steps)
+    {
+        for (int i = 1; i <= steps; i++)
+        {
+            selectedPlayer = playerIndex;
+            int calcIndex = players[selectedPlayer].GetComponent<PlayerController>().currentSlotPosition + 1;
+            calcIndex = (int)Mathf.Repeat(calcIndex, gc.allSlots.Length);
+            selectedSlot = calcIndex;
+            checkAndUpdate(selectedSlot, selectedPlayer);
+            timer();
+        }
 
         selectedPlayer = playerIndex;
         gc.allSlots[selectedSlot].GetComponent<SlotController>().TriggerSlotBehaviour(selectedPlayer);
+        yield return null;
+
+    }
+
+    private IEnumerator timer()
+    {
+        yield return new WaitForSeconds(0.5f);
     }
 
     void checkAndUpdate(int slotIndex, int playerIndex)
@@ -102,9 +127,7 @@ public class MoveController : MonoBehaviour
                 for(int j = 0; j < players.Length; j++)
                 {
                     if(players[j].GetComponent<PlayerController>().currentSlotPosition == players[i].GetComponent<PlayerController>().lastSlotIndex)
-                    {
-                        Debug.Log("updating J");
-                        
+                    {   
                         selectedPlayer = j;
                         updatePlayerPosition(new Vector3(0, 0), players[j].GetComponent<PlayerController>().currentSlotPosition);
                     }
