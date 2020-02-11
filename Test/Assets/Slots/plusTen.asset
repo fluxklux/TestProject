@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: plusTen
   m_EditorClassIdentifier: 
   slotType: 2
-  color: {r: 1, g: 0.67668825, b: 0, a: 1}
-  chance: 0
+  color: {r: 0.054957304, g: 0.7828037, b: 0.8962264, a: 1}

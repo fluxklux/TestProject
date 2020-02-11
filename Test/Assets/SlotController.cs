@@ -21,6 +21,7 @@ public class SlotController : MonoBehaviour
         uc = gameController.GetComponent<UIController>();
         mgc = gameController.GetComponent<MinigameController>();
         currentSlot = gc.allSlotTypes[Random.Range(0, gc.allSlotTypes.Length)];
+        renderer.color = currentSlot.color;
     }
 
     public void TriggerSlotBehaviour(int playerIndex)

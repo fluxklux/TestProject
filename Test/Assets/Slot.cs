@@ -8,4 +8,5 @@ public enum SlotType { plusThree, minusThree, plusTen, miniGame, chans};
 public class Slot : ScriptableObject
 {
     public SlotType slotType;
+    public Color color;
 }
