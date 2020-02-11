@@ -6,15 +6,20 @@ public class SlotController : MonoBehaviour
 {
     public Slot currentSlot;
 
+    GameObject gameController;
     GameController gc;
     UIController uc;
+    MinigameController mgc;
     new SpriteRenderer renderer;
 
     private void Start()
     {
+        gameController = GameObject.FindGameObjectWithTag("GameController");
+
         renderer = GetComponentInChildren<SpriteRenderer>();
-        gc = Object.FindObjectOfType<GameController>();
-        uc = Object.FindObjectOfType<UIController>();
+        gc = gameController.GetComponent<GameController>();
+        uc = gameController.GetComponent<UIController>();
+        mgc = gameController.GetComponent<MinigameController>();
         currentSlot = gc.allSlotTypes[Random.Range(0, gc.allSlotTypes.Length)];
     }
 
@@ -25,21 +30,22 @@ public class SlotController : MonoBehaviour
             case SlotType.plusThree:
                 //Add 3 fruits to player
                 gc.ChangeFruitAmount(playerIndex, 3);
-                Debug.Log("3 fruits: " + playerIndex);
+                //Debug.Log("3 fruits: " + playerIndex);
                 break;
             case SlotType.minusThree:
                 //Remove 3 fruits from player
                 gc.ChangeFruitAmount(playerIndex, -3);
-                Debug.Log("-3 fruits: " + playerIndex);
+                //Debug.Log("-3 fruits: " + playerIndex);
                 break;
             case SlotType.plusTen:
                 //Add 10 fruits to player
                 gc.ChangeFruitAmount(playerIndex, 10);
-                Debug.Log("10 fruits: " + playerIndex);
+                //Debug.Log("10 fruits: " + playerIndex);
                 break;
             case SlotType.miniGame:
                 //minigame
-                Debug.Log("minigame " + playerIndex);
+                mgc.RandomizeMinigame();
+                //Debug.Log("minigame " + playerIndex);
                 break;
             default:
                 break;
