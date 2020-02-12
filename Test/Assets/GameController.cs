@@ -31,7 +31,8 @@ public class GameController : MonoBehaviour
     UIController uc;
     MoveController mc;
     DPad dpad;
-    bool doneOnce = false;
+    bool firstSequenceDone = false;
+    bool secondSequenceDone = false;
     bool debugMode = false;
 
     private void Start()
@@ -90,12 +91,20 @@ public class GameController : MonoBehaviour
                 uiFill.fillAmount = calcFloat;
                 uc.DisplayTimerFloat(timer);
 
-                if(timer <= (timerMax - 3) && !doneOnce)
+                if(timer <= (timerMax - 3) && !firstSequenceDone)
                 {
                     StartCoroutine(WaitForNextRound());
                     //StartCoroutine(CycleQueue(1, 0));
-                    doneOnce = true;
+                    firstSequenceDone = true;
                     ic.ChangeTakeInputBool(false);
+                }
+                if(timer <= (timerMax - 13) && !secondSequenceDone)
+                {
+                    for(int i = 0; i <= (queueObjects.Count - 1); i++)
+                    {
+                        allSlots[mc.players[i].GetComponent<PlayerController>().currentSlotPosition].GetComponent<SlotController>().TriggerSlotBehaviour(i);
+                    }
+                    secondSequenceDone = true;
                 }
             }
             else
@@ -202,7 +211,8 @@ public class GameController : MonoBehaviour
         if (queueFinished)
         {
             ic.ChangeTakeInputBool(true);
-            doneOnce = false;
+            firstSequenceDone = false;
+            secondSequenceDone = false;
             TriggerTimer(false);
             uc.TriggerEvent("<color=green>WAITING FOR PLAYER INPUTS...</color>");
             dpad.Randomize();
