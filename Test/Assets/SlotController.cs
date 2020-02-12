@@ -47,7 +47,7 @@ public class SlotController : MonoBehaviour
             case SlotType.miniGame:
                 //minigame
                 mgc.RandomizeMinigame();
-                //Debug.Log("minigame " + playerIndex);
+                Debug.Log("minigame " + playerIndex);
                 break;
             default:
                 break;

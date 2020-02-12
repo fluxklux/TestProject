@@ -98,7 +98,7 @@ public class GameController : MonoBehaviour
                     firstSequenceDone = true;
                     ic.ChangeTakeInputBool(false);
                 }
-                if(timer <= (timerMax - 13) && !secondSequenceDone)
+                if(timer <= (timerMax - 8) && !secondSequenceDone)
                 {
                     for(int i = 0; i <= (queueObjects.Count - 1); i++)
                     {

@@ -65,7 +65,7 @@ public class InputController : MonoBehaviour
     {
         gameStarted = true;
         uc.ToggleConnectionUi(false);
-        Debug.Log("Started game!");
+        //Debug.Log("Started game!");
     }
 
     private void Update()
