@@ -32,6 +32,10 @@ public class MoveController : MonoBehaviour
         //StartCoroutine(cycleSteps(playerIndex, steps));
         selectedPlayer = playerIndex;
         //gc.allSlots[selectedSlot].GetComponent<SlotController>().TriggerSlotBehaviour(selectedPlayer);
+
+        players[selectedPlayer].GetComponent<PlayerController>().UpdateScale(selectedPlayer, gc.allSlots[20].transform.position.y);
+
+
     }
 
     /*
