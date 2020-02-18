@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+
         //Debug
         if(Input.GetKeyDown(KeyCode.P))
         {
@@ -113,6 +114,7 @@ public class GameController : MonoBehaviour
                 queueFinished = true;
                 StartCoroutine(WaitForNextRound());
             }
+            SetTimerColor();
         }
     }
 
@@ -135,7 +137,8 @@ public class GameController : MonoBehaviour
 
     public void TriggerTimer(bool pause)
     {
-        if(pause)
+        ResetTimerColor();
+        if (pause)
         {
             countDown = false;
         }
@@ -175,6 +178,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator CycleQueue(float actionLength, int queueIndex)
     {
+
         yield return new WaitForSeconds(actionLength);
         int newQueueIndex = queueIndex + 1;
         
@@ -218,5 +222,20 @@ public class GameController : MonoBehaviour
             dpad.Randomize();
             queueFinished = false;
         }
+    }
+    public void SetTimerColor()
+    {
+        if(timer <= (timerMax - 10))
+        {
+            timerText.color = new Color32(181, 178, 4, 255);
+        }
+        else if (timer <= (timerMax - 20))
+        {
+            timerText.color = new Color32(254, 0, 13, 255);
+        }
+    }
+    public void ResetTimerColor()
+    {
+        timerText.color = new Color32(255, 255, 255, 255);
     }
 }
